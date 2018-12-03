@@ -17,7 +17,7 @@ struct compare_custo_caminho {
     }
 };
 
-result_sssp SSSP(imagem *img, int source) {
+result_sssp SSSP(imagem *img, std::vector<int>& source) {
     std::priority_queue<custo_caminho, std::vector<custo_caminho>, compare_custo_caminho> Q;
     double *custos = new double[img->total_size];
     int *predecessor = new int[img->total_size];
@@ -31,9 +31,11 @@ result_sssp SSSP(imagem *img, int source) {
         analisado[i] = false;
     }
 
-    Q.push(custo_caminho(0.0, source));
-    predecessor[source] = source;
-    custos[source] = 0.0;
+    for(int& s: source) {
+        Q.push(custo_caminho(0.0, s));
+        predecessor[s] = s;
+        custos[s] = 0.0;
+    }
 
     while (!Q.empty()) {
         custo_caminho cm = Q.top();
@@ -102,22 +104,26 @@ int main(int argc, char **argv) {
     std::string path_output(argv[2]);
     imagem *img = read_pgm(path);
     
-    int n_fg, n_bg;
+    int n_fg, n_bg, seed_fg, seed_bg;
     int x, y;
     
     std::cin >> n_fg >> n_bg;
-    assert(n_fg == 1);
-    assert(n_bg == 1);
     
-    std::cin >> x >> y;
-    int seed_fg = y * img->cols + x;
+    std::vector<int> seeds_fg;
+    std::vector<int> seeds_bg;
+
+    for(int i = 0; i < n_fg; i++) {
+        std::cin >> x >> y;
+        seeds_fg.push_back(y * img->cols + x);
+    }
+
+    for(int i = 0; i < n_bg; i++) {
+        std::cin >> x >> y;
+        seeds_bg.push_back(y * img->cols + x);
+    }
     
-    std::cin >> x >> y;
-    int seed_bg = y * img->cols + x;
-    
-    
-    result_sssp fg = SSSP(img, seed_fg);
-    result_sssp bg = SSSP(img, seed_bg);
+    result_sssp fg = SSSP(img, seeds_fg);
+    result_sssp bg = SSSP(img, seeds_bg);
     
     imagem *saida = new_image(img->rows, img->cols);
     

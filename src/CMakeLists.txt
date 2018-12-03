@@ -1,9 +1,8 @@
-cmake_minimum_required(VERSION 3.10.2)
+cmake_minimum_required(VERSION 3.5.1)
 
 set(CMAKE_CXX_FLAGS "-Wall -Wextra")
 set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
-set(MAIN_SOURCES main.cpp)
-set(MAIN_EXE_NAME "imageseg")
+set(CMAKE_CXX_STANDARD 11)
 
 find_package(Boost REQUIRED)
 find_package(PkgConfig REQUIRED)
@@ -13,15 +12,22 @@ include_directories(
     ${Boost_INCLUDE_DIR}
 )
 
-file(GLOB SOURCES *.cpp)
+# ---
+
+# add_executable(
+#     imageseg
+#     main.cpp
+# )
+
+# target_link_libraries(
+#     imageseg
+#     ${Boost_LIBRARIES}
+# )
+
+# ---
 
 add_executable(
-    ${MAIN_EXE_NAME}
-    ${MAIN_SOURCES}
-    ${SOURCES}
-)
-
-target_link_libraries(
-    ${MAIN_EXE_NAME}
-    ${Boost_LIBRARIES}
+    imageseg_seq
+    main.cpp
+    imagem.cpp
 )

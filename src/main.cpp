@@ -1,3 +1,6 @@
+#include "segmentation.hpp"
+#include "segmentationpar.hpp"
+#include "segmentationseq.hpp"
 #include <iostream>
 #include <queue>
 #include <vector>
@@ -104,7 +107,7 @@ int main(int argc, char **argv) {
     std::string path_output(argv[2]);
     imagem *img = read_pgm(path);
     
-    int n_fg, n_bg, seed_fg, seed_bg;
+    int n_fg, n_bg;
     int x, y;
     
     std::cin >> n_fg >> n_bg;

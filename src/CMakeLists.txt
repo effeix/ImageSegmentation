@@ -1,7 +1,9 @@
 cmake_minimum_required(VERSION 3.5.1)
+project(ImageSegmentation)
 
 set(CMAKE_CXX_FLAGS "-Wall -Wextra")
 set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
+set(CMAKE_CXX_FLAGS_RELEASE "-O2")
 set(CMAKE_CXX_STANDARD 11)
 
 find_package(Boost REQUIRED)
@@ -27,7 +29,11 @@ include_directories(
 # ---
 
 add_executable(
-    imageseg_seq
+    imageseg
     main.cpp
     imagem.cpp
+    segmentationseq.cpp
+    segmentationpar.cpp
 )
+
+target_include_directories(imageseg PRIVATE ../inc)

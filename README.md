@@ -7,6 +7,12 @@ Neste projeto o objetivo é realizar a separação de um objeto seleciona como p
 ## Explicação
 Primeiramente, devemos interpretar a imagem a ser segmentada como um grafo (conjunto de nós que possuem conexões entre eles). Neste grafo cada pixel da imagem é um nó e possue quatro nós vizinhos: os pixels de cima, de baixo da esquerda e da direita na imagem original. Ligando estes nós existem arestas cujo peso é a diferença de cor entre os dois nós ligados por ela. Por exemplo: se temos um nó `i` de cor 255 (branco) ligado à um nó `j` de cor 127 (cinza), a aresta que liga estes dois nós tem peso 255 - 127 = 128. Depois de calculados todos os pesos das arestas, deseja-se descobrir, para cada pixel, se este está mais perto de uma semente de frente ou uma de fundo. Para isto, deve-se achar o menor caminho (com menor soma de pesos) entre um pixel `i` e as sementes de fundo e o menor caminho entre o mesmo pixel `i` e as sementes de frente. Dentre estes menores caminhos, o menor deles mostra a qual plano o pixel pertence. O algoritmo utilizado para encontrar o menor caminho entre dois pixels foi o SSSP (Single Source Shortest Path). 
 
+## Dependências
+- [CUDA Toolkit](https://developer.nvidia.com/cuda-downloads)
+- [Thrust](http://thrust.github.io/)
+- [Python 3.6.5+](https://www.python.org/)
+- Make
+
 ## Utilização
 Primeiramente, deve-se compilar os três executáveis utilizados pelo programa. Vá para a pasta `ImageSegmentation/src/build/` e execute o comando `make`.
 

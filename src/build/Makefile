@@ -1,4 +1,4 @@
-CFLAGS = --std=c++11 -O0 -g
+CFLAGS = --std=c++11 -O2
 
 all: edge_filter imseg_s imseg_p
 

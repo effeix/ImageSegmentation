@@ -37,9 +37,9 @@ imagem *read_pgm(std::string path) {
 
 void write_pgm(imagem *img, std::string path) {
     std::ofstream of(path);
-    of << "P2\n" << img->cols << " " <<  img->rows << " 255\n";
+    of << "P2\n" << img->cols << " " <<  img->rows << "\n255\n";
     for (int k = 0; k < img->total_size; k++) {
-        of << ((int) img->pixels[k]) << " ";
+        of << ((int) img->pixels[k]) << '\n';
     }
 }
 
